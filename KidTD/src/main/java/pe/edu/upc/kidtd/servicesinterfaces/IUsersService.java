@@ -1,14 +1,14 @@
 package pe.edu.upc.kidtd.servicesinterfaces;
 
-import pe.edu.upc.kidtd.entities.Users;
+import pe.edu.upc.kidtd.entities.User;
 
 import java.util.List;
 
 public interface IUsersService {
-    public List<Users> list();
-    public void insert(Users user);
+    public List<User> list();
+    public void insert(User user);
 
-    public Users listId(int id);
+    public User listId(int id);
     public void delete(int id);
-    public void update(Users user);
+    public void update(User user);
 }
