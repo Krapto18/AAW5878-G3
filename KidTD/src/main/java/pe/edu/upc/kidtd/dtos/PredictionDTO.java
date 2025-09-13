@@ -1,36 +1,19 @@
-package pe.edu.upc.kidtd.entities;
+package pe.edu.upc.kidtd.dtos;
 
-import jakarta.persistence.*;
+import jakarta.persistence.Column;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
+import pe.edu.upc.kidtd.entities.User;
 
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
-@Entity
-@Table(name = "Prediction")
-public class Prediction {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+public class PredictionDTO {
     private int predictionId;
-    @ManyToOne
-    @JoinColumn(name="userId")
     private User user;
-    @Column(name = "predictionScore", nullable = false)
     private DecimalFormat predictionScore;
-    @Column(name="explanationText", nullable = false)
     private String explanationText;
-    @Column(name="predictedAt",nullable = false)
     private LocalDate predictedAt;
-
-    public Prediction() {
-    }
-
-    public Prediction(int predictionId, User user, String explanationText, DecimalFormat predictionScore, LocalDate predictedAt) {
-        this.predictionId = predictionId;
-        this.user = user;
-        this.explanationText = explanationText;
-        this.predictionScore = predictionScore;
-        this.predictedAt = predictedAt;
-    }
 
     public int getPredictionId() {
         return predictionId;
