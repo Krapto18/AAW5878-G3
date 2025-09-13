@@ -2,7 +2,7 @@ package pe.edu.upc.kidtd.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import pe.edu.upc.kidtd.entities.Users;
+import pe.edu.upc.kidtd.entities.User;
 import pe.edu.upc.kidtd.repositories.IUsersRepository;
 import pe.edu.upc.kidtd.servicesinterfaces.IUsersService;
 
@@ -14,17 +14,17 @@ public class UsersServiceImplement implements IUsersService {
     private IUsersRepository uR;
 
     @Override
-    public List<Users> list() {
+    public List<User> list() {
         return uR.findAll();
     }
 
     @Override
-    public void insert(Users user) {
+    public void insert(User user) {
         uR.save(user);
     }
 
     @Override
-    public Users listId(int id) {
+    public User listId(int id) {
         return uR.findById(id).orElse(null);
     }
 
@@ -34,7 +34,7 @@ public class UsersServiceImplement implements IUsersService {
     }
 
     @Override
-    public void update(Users user) {
+    public void update(User user) {
         uR.save(user);
     }
 }
