@@ -1,6 +1,5 @@
 package pe.edu.upc.kidtd.dtos;
 
-import java.time.LocalDate;
 
 public class UsersPerRolDTO {
     private int userId;
