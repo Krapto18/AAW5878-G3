@@ -20,7 +20,7 @@ public class RolesController {
     private IRolesService rS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT')")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolesDTO> listarRoles() {
         return rS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -29,6 +29,7 @@ public class RolesController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> BuscarRoles(@PathVariable("id") Integer id) {
         Roles r = rS.listId(id);
         if (r == null) {
@@ -42,6 +43,7 @@ public class RolesController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void insertarRol(@RequestBody RolesDTO r) {
         ModelMapper m = new ModelMapper();
         Roles rol = m.map(r, Roles.class);
@@ -49,6 +51,7 @@ public class RolesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
         Roles r = rS.listId(id);
         if (r == null) {
@@ -60,6 +63,7 @@ public class RolesController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificarRol(@RequestBody RolesDTO r) {
         ModelMapper m = new ModelMapper();
         Roles rol = m.map(r, Roles.class);

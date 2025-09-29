@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
 import pe.edu.upc.kidtd.dtos.UsersDTO;
+import pe.edu.upc.kidtd.dtos.UsersPerRolDTO;
 import pe.edu.upc.kidtd.entities.User;
 import pe.edu.upc.kidtd.servicesinterfaces.IUsersService;
 
@@ -32,6 +33,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> PerfilDeUsuario(@PathVariable("id") Integer id) {
         User u = uS.listId(id);
         if (u == null) {
@@ -45,6 +47,7 @@ public class UsersController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public void insertarUsuario(@RequestBody UsersDTO u) {
         ModelMapper m = new ModelMapper();
         User user = m.map(u, User.class);
@@ -52,6 +55,7 @@ public class UsersController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
         User u = uS.listId(id);
         if (u == null) {
@@ -63,6 +67,7 @@ public class UsersController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public ResponseEntity<String> modificarUsuario(@RequestBody UsersDTO u) {
         ModelMapper m = new ModelMapper();
         User user = m.map(u, User.class);
@@ -75,4 +80,21 @@ public class UsersController {
         return ResponseEntity.ok("Usuario con el ID " + u.getUserId() + " modificado correctamente.");
     }
 
+    @GetMapping("/RoleFilter")
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL')")
+    public ResponseEntity<?> ListarNiños(@RequestParam String role_name) {
+        List<User> users = uS.listByRole(role_name);
+
+        if (users.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No se encontraron usuarios con el rol: " + role_name);
+        }
+
+        List<UsersPerRolDTO> listaDTO = users.stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, UsersPerRolDTO.class);
+        }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
 }
