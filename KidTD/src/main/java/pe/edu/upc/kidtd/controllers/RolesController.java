@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.RolesDTO;
 import pe.edu.upc.kidtd.entities.Roles;
@@ -13,12 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(name = "/Roles")
+@RequestMapping("/Roles")
 public class RolesController {
     @Autowired
     private IRolesService rS;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','CLIENT')")
     public List<RolesDTO> listarRoles() {
         return rS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();

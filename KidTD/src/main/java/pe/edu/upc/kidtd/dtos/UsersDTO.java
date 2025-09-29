@@ -1,64 +1,83 @@
 package pe.edu.upc.kidtd.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
+import jakarta.persistence.*;
+import pe.edu.upc.kidtd.entities.Roles;
 
+import javax.management.relation.Role;
 import java.time.LocalDate;
+import java.util.List;
 
 public class UsersDTO {
-    private int User_id;
-    private String Username;
-    private String Email;
-    private String Password_hash;
-    private LocalDate Created_at;
-    private LocalDate Updated_at;
+    private int userId;
+    private String username;
+    private String email;
+    private String passwordHash;
+    private LocalDate createdAt;
+    private LocalDate updatedAt;
+    private Boolean enabled;
+    private String role;
 
-    public int getUser_id() {
-        return User_id;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setUser_id(int user_id) {
-        User_id = user_id;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getUsername() {
-        return Username;
+        return username;
     }
 
     public void setUsername(String username) {
-        Username = username;
+        this.username = username;
     }
 
     public String getEmail() {
-        return Email;
+        return email;
     }
 
     public void setEmail(String email) {
-        Email = email;
+        this.email = email;
     }
 
-    public String getPassword_hash() {
-        return Password_hash;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword_hash(String password_hash) {
-        Password_hash = password_hash;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
     }
 
-    public LocalDate getCreated_at() {
-        return Created_at;
+    public LocalDate getCreatedAt() {
+        return createdAt;
     }
 
-    public void setCreated_at(LocalDate created_at) {
-        Created_at = created_at;
+    public void setCreatedAt(LocalDate createdAt) {
+        this.createdAt = createdAt;
     }
 
-    public LocalDate getUpdated_at() {
-        return Updated_at;
+    public LocalDate getUpdatedAt() {
+        return updatedAt;
     }
 
-    public void setUpdated_at(LocalDate updated_at) {
-        Updated_at = updated_at;
+    public void setUpdatedAt(LocalDate updatedAt) {
+        this.updatedAt = updatedAt;
+    }
+
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role.getRole_name();
     }
 }

@@ -1,7 +1,6 @@
 package pe.edu.upc.kidtd.servicesinterfaces;
 
 import pe.edu.upc.kidtd.entities.Questionnaries;
-import pe.edu.upc.kidtd.entities.User;
 
 import java.util.List;
 

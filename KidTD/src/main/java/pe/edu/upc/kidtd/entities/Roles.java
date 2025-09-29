@@ -2,6 +2,8 @@ package pe.edu.upc.kidtd.entities;
 
 import jakarta.persistence.*;
 
+import java.util.List;
+
 @Entity
 @Table(name = "\"Roles\"")
 public class Roles {
@@ -12,12 +14,27 @@ public class Roles {
     @Column(name = "role_name", nullable = false, length = 30)
     private String role_name;
 
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "role_id")
+    private List<User> users;
+
     public Roles() {
 
     }
-    public Roles(int role_id, String role_name) {
+
+    public Roles(int role_id, String role_name, List<User> users) {
         this.role_id = role_id;
         this.role_name = role_name;
+        this.users = users;
+    }
+
+    public List<User> getUsers() {
+        return users;
+    }
+
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
     public int getRole_id() {

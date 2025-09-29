@@ -1,8 +1,5 @@
 package pe.edu.upc.kidtd.dtos;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
 import pe.edu.upc.kidtd.entities.User;
 
 import java.text.DecimalFormat;

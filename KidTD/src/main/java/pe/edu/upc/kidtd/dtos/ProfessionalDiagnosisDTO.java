@@ -1,6 +1,7 @@
 package pe.edu.upc.kidtd.dtos;
 
 import pe.edu.upc.kidtd.entities.User;
+
 import java.time.LocalDateTime;
 
 public class ProfessionalDiagnosisDTO {
