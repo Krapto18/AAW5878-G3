@@ -3,11 +3,13 @@ package pe.edu.upc.kidtd.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.List;
 
 @Entity
-@Table(name = "\"User\"")
-public class User {
+@Table(name = "\"User\"",uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id"})})
+public class User implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
@@ -18,7 +20,7 @@ public class User {
     @Column(name = "email", nullable = false, length = 50)
     private String email;
 
-    @Column(name = "passwordHash", nullable = false, length = 30)
+    @Column(name = "passwordHash", nullable = false, length = 200)
     private String passwordHash;
 
     @Column(name = "createdAt", nullable = false)
@@ -27,25 +29,25 @@ public class User {
     @Column(name = "updatedAt", nullable = false)
     private LocalDate updatedAt;
 
+    private Boolean enabled;
+
+    @ManyToOne
+    @JoinColumn(name = "role_id", nullable = false)
+    private Roles role;
+
     public User() {
 
     }
 
-    public User(int userId, String username, String email, String passwordHash, LocalDate createdAt, LocalDate updatedAt) {
+    public User(int userId, String username, String passwordHash, String email, LocalDate createdAt, Boolean enabled, LocalDate updatedAt, Roles role) {
         this.userId = userId;
         this.username = username;
-        this.email = email;
         this.passwordHash = passwordHash;
+        this.email = email;
         this.createdAt = createdAt;
+        this.enabled = enabled;
         this.updatedAt = updatedAt;
-    }
-
-    public int getUser_id() {
-        return userId;
-    }
-
-    public void setUser_id(int userId) {
-        this.userId = userId;
+        this.role = role;
     }
 
     public String getUsername() {
@@ -56,12 +58,24 @@ public class User {
         this.username = username;
     }
 
+    public Boolean getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getEmail() {
         return email;
     }
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getPasswordHash() {
@@ -86,5 +100,17 @@ public class User {
 
     public void setUpdatedAt(LocalDate updatedAt) {
         this.updatedAt = updatedAt;
+    }
+
+    public int getUserId() {
+        return userId;
+    }
+
+    public Roles getRole() {
+        return role;
+    }
+
+    public void setRole(Roles role) {
+        this.role = role;
     }
 }

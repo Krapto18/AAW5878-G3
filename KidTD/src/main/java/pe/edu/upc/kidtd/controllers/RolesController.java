@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.RolesDTO;
 import pe.edu.upc.kidtd.entities.Roles;
@@ -13,12 +14,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping(name = "/Roles")
+@RequestMapping("/Roles")
 public class RolesController {
     @Autowired
     private IRolesService rS;
 
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public List<RolesDTO> listarRoles() {
         return rS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -27,6 +29,7 @@ public class RolesController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> BuscarRoles(@PathVariable("id") Integer id) {
         Roles r = rS.listId(id);
         if (r == null) {
@@ -40,6 +43,7 @@ public class RolesController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void insertarRol(@RequestBody RolesDTO r) {
         ModelMapper m = new ModelMapper();
         Roles rol = m.map(r, Roles.class);
@@ -47,6 +51,7 @@ public class RolesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> eliminarRol(@PathVariable("id") Integer id) {
         Roles r = rS.listId(id);
         if (r == null) {
@@ -58,6 +63,7 @@ public class RolesController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificarRol(@RequestBody RolesDTO r) {
         ModelMapper m = new ModelMapper();
         Roles rol = m.map(r, Roles.class);

@@ -1,6 +1,5 @@
 package pe.edu.upc.kidtd.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.kidtd.entities.User;
 
 public class LinkedProfileDTO {

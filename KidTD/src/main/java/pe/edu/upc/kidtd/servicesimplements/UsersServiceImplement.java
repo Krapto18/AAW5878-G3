@@ -37,4 +37,9 @@ public class UsersServiceImplement implements IUsersService {
     public void update(User user) {
         uR.save(user);
     }
+
+    @Override
+    public List<User> listByRole(String role) {
+        return uR.buscarXRol(role);
+    }
 }
