@@ -5,9 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.kidtd.dtos.GoalDTO;
 import pe.edu.upc.kidtd.dtos.PredictionDTO;
-import pe.edu.upc.kidtd.entities.Goal;
 import pe.edu.upc.kidtd.entities.Prediction;
 import pe.edu.upc.kidtd.servicesinterfaces.IPredictionService;
 

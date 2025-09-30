@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
+import pe.edu.upc.kidtd.dtos.UserPostDTO;
 import pe.edu.upc.kidtd.dtos.UsersDTO;
 import pe.edu.upc.kidtd.dtos.UsersPerRolDTO;
 import pe.edu.upc.kidtd.entities.User;
@@ -48,9 +49,9 @@ public class UsersController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
-    public void insertarUsuario(@RequestBody UsersDTO u) {
+    public void insertarUsuario(@RequestBody UserPostDTO uDTO) {
         ModelMapper m = new ModelMapper();
-        User user = m.map(u, User.class);
+        User user = m.map(uDTO, User.class);
         uS.insert(user);
     }
 

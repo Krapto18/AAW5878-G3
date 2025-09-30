@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.QuestionnariesDTO;
 import pe.edu.upc.kidtd.entities.Questionnaries;
@@ -20,6 +21,7 @@ public class QuestionnariesController {
     private IQuestionnariesService qS;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public List<QuestionnariesDTO> listarQuestionnaries() {
         return qS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -28,6 +30,7 @@ public class QuestionnariesController {
     }
 
     @GetMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public ResponseEntity<?> BuscarCuestionario(@PathVariable("id") Integer id) {
         Questionnaries q = qS.listId(id);
         if (q == null) {
@@ -41,6 +44,7 @@ public class QuestionnariesController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public void insertarCuestionario(@RequestBody QuestionnariesDTO q) {
         ModelMapper m = new ModelMapper();
         Questionnaries cuestionario = m.map(q, Questionnaries.class);
@@ -48,6 +52,7 @@ public class QuestionnariesController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> eliminarCuestionario(@PathVariable("id") Integer id) {
         Questionnaries q = qS.listId(id);
         if (q == null) {
@@ -59,6 +64,7 @@ public class QuestionnariesController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<String> modificarCuestionario(@RequestBody QuestionnariesDTO q) {
         ModelMapper m = new ModelMapper();
         Questionnaries quest = m.map(q, Questionnaries.class);

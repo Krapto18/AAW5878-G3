@@ -4,6 +4,7 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.QuestionsDTO;
@@ -20,6 +21,7 @@ public class QuestionsController {
     private IQuestionsService qS;
 
     @GetMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public List<QuestionsDTO> listQuestions() {
         return qS.list().stream().map(x -> {
             ModelMapper m = new ModelMapper();
@@ -28,6 +30,7 @@ public class QuestionsController {
     }
 
     @PostMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public void insertQuestions(@RequestBody QuestionsDTO q){
         ModelMapper m = new ModelMapper();
         Questions questions = m.map(q, Questions.class);
@@ -35,6 +38,7 @@ public class QuestionsController {
     }
 
     @DeleteMapping("/{id}")
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> deleteQuestions(@PathVariable("id") Integer id){
         Questions q = qS.findById(id);
         if (q == null){
@@ -45,6 +49,7 @@ public class QuestionsController {
     }
 
     @PutMapping
+    @PreAuthorize("hasAnyAuthority('ADMIN')")
     public ResponseEntity<String> updateQuestions(@RequestBody QuestionsDTO dto){
         ModelMapper m = new ModelMapper();
         Questions q = m.map(dto, Questions.class);
