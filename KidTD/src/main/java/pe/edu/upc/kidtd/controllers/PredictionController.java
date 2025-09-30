@@ -30,25 +30,4 @@ public class PredictionController {
         Prediction prediction=m.map(predictionDTO, Prediction.class);
         predictionService.insert(prediction);
     }
-    @DeleteMapping("{id}")
-    public ResponseEntity<String> deletePrediction(@PathVariable("id") Integer id){
-        Prediction prediction= predictionService.findById(id);
-        if(prediction==null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro con el ID: " + id);
-        }
-        predictionService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Registro eliminado ID: " + id);
-    }
-    @PutMapping
-    public ResponseEntity<String> updatePrediction(@RequestBody PredictionDTO dto) {
-        ModelMapper m = new ModelMapper();
-        Prediction prediction = m.map(dto, Prediction.class);
-        Prediction exist = predictionService.findById(prediction.getPredictionId());
-        if (exist == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un registro con el ID: " + prediction.getPredictionId());
-        }
-        predictionService.update(prediction);
-        return ResponseEntity.ok("Registro con ID " + prediction.getPredictionId() + " modificado correctamente.");
-    }
 }
