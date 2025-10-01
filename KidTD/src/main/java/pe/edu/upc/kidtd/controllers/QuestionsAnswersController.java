@@ -43,16 +43,4 @@ public class QuestionsAnswersController {
         qaS.delete(id);
         return ResponseEntity.ok("Respuesta con el ID: " + id + " eliminado correctamente");
     }
-
-    @PutMapping
-    public ResponseEntity<String> updateQuestionsAnswers(@RequestBody QuestionsAnswersDTO dto) {
-        ModelMapper m = new ModelMapper();
-        QuestionsAnswers qa = m.map(dto, QuestionsAnswers.class);
-        QuestionsAnswers exist = qaS.findById(qa.getAnswer_id());
-        if(exist == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se puede modificar. No existe un registro con el ID: " + qa.getAnswer_id());
-        }
-        qaS.update(qa);
-        return ResponseEntity.ok("Registro con ID " + qa.getAnswer_id() + " modificado correctamente.");
-    }
 }

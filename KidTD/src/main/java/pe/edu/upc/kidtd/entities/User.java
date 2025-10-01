@@ -29,6 +29,7 @@ public class User implements Serializable {
     @Column(name = "updatedAt", nullable = false)
     private LocalDate updatedAt;
 
+    @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
     @ManyToOne

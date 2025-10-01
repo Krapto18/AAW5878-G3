@@ -32,18 +32,6 @@ public class SymptomsLogController {
         slS.insert(symptomsLog);
     }
 
-
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteSymptomsLog(@PathVariable("id") Integer id) {
-        SymptomsLog sl = slS.findById(id);
-        if (sl == null) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No existe un registro con el ID: " + id);
-        }
-        slS.delete(id);
-        return ResponseEntity.ok("Síntoma de Id: " + id + " eliminado correctamente.");
-    }
-
     @PutMapping
     public ResponseEntity<String> updateSymptomsLog(@RequestBody SymptomsLogDTO dto) {
         ModelMapper m = new ModelMapper();
