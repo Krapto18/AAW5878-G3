@@ -3,6 +3,7 @@ package pe.edu.upc.kidtd.dtos;
 import pe.edu.upc.kidtd.entities.Roles;
 
 import java.time.LocalDate;
+import java.util.List;
 
 public class UserPostDTO {
     private int userId;
@@ -12,7 +13,7 @@ public class UserPostDTO {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private Boolean enabled;
-    private Roles role_id;
+    private List<Roles> roles;
 
     public int getUserId() {
         return userId;
@@ -70,11 +71,11 @@ public class UserPostDTO {
         this.enabled = enabled;
     }
 
-    public Roles getRole_id() {
-        return role_id;
+    public List<Roles> getRoles() {
+        return roles;
     }
 
-    public void setRole_id(Roles role_id) {
-        this.role_id = role_id;
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 }

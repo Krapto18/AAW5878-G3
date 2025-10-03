@@ -20,6 +20,10 @@ public class UsersServiceImplement implements IUsersService {
 
     @Override
     public void insert(User user) {
+
+        if (user.getRoles() != null) {
+            user.getRoles().forEach(role -> role.setUser(user));
+        }
         uR.save(user);
     }
 
@@ -41,5 +45,10 @@ public class UsersServiceImplement implements IUsersService {
     @Override
     public List<User> listByRole(String role) {
         return uR.buscarXRol(role);
+    }
+
+    @Override
+    public List<User> ListarUsuarios() {
+        return uR.ListarUsuarios();
     }
 }

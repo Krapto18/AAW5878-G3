@@ -7,9 +7,10 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
 
+
 @Entity
-@Table(name = "\"User\"",uniqueConstraints = {@UniqueConstraint(columnNames = {"role_id"})})
-public class User implements Serializable {
+@Table(name = "\"User\"")
+public class User  implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int userId;
@@ -32,15 +33,14 @@ public class User implements Serializable {
     @Column(name = "enabled", nullable = false)
     private Boolean enabled;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Roles role;
+    @OneToMany(mappedBy = "user",fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    private List<Roles> roles;
 
     public User() {
 
     }
 
-    public User(int userId, String username, String passwordHash, String email, LocalDate createdAt, Boolean enabled, LocalDate updatedAt, Roles role) {
+    public User(int userId, String username, String passwordHash, String email, LocalDate createdAt, Boolean enabled, LocalDate updatedAt, List<Roles> roles) {
         this.userId = userId;
         this.username = username;
         this.passwordHash = passwordHash;
@@ -48,7 +48,15 @@ public class User implements Serializable {
         this.createdAt = createdAt;
         this.enabled = enabled;
         this.updatedAt = updatedAt;
-        this.role = role;
+        this.roles = roles;
+    }
+
+    public List<Roles> getRoles() {
+        return roles;
+    }
+
+    public void setRoles(List<Roles> roles) {
+        this.roles = roles;
     }
 
     public String getUsername() {
@@ -107,11 +115,5 @@ public class User implements Serializable {
         return userId;
     }
 
-    public Roles getRole() {
-        return role;
-    }
 
-    public void setRole(Roles role) {
-        this.role = role;
-    }
 }

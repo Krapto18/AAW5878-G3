@@ -14,11 +14,16 @@ public interface IUsersRepository extends JpaRepository<User,Integer> {
     @Query("select count(u.username) from User u where u.username =:username")
     public int buscarUsername(@Param("username") String nombre);
 
+    @Query(value = "SELECT u.* ,r.role_name FROM public.\"user\" u inner join \n" +
+            "roles r on u.user_id = r.user_id\n" +
+            "ORDER BY user_id ASC ",nativeQuery = true)
+    public List<User> ListarUsuarios();
 
     @Query(value = "SELECT u.* \n" +
             "FROM public.\"user\" u inner join roles r \n" +
-            "on u.role_id = r.role_id\n" +
+            "on u.user_id = r.user_id\n" +
             "WHERE r.role_name =:role_name",nativeQuery = true)
     public List<User> buscarXRol(@Param("role_name") String role);
+
 
 }
