@@ -57,14 +57,14 @@ public class UsersController {
 
     @DeleteMapping("/{id}")
     @PreAuthorize("hasAuthority('ADMIN')")
-    public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer id) {
-        User u = uS.listId(id);
+    public ResponseEntity<String> eliminarUsuario(@PathVariable("id") Integer uid) {
+        User u = uS.listId(uid);
         if (u == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No existe un usuario con el ID: " + id);
+                    .body("No existe un usuario con el ID: " + uid);
         }
-        uS.delete(id);
-        return ResponseEntity.ok("Usuario con el ID " + id + " eliminado correctamente.");
+        uS.delete(uid);
+        return ResponseEntity.ok("Usuario con el ID " + uid + " eliminado correctamente.");
     }
 
     @PutMapping

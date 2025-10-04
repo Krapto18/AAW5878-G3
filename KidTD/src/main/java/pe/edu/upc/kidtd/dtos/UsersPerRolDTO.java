@@ -1,11 +1,12 @@
 package pe.edu.upc.kidtd.dtos;
 
 
+import java.util.List;
+
 public class UsersPerRolDTO {
     private int userId;
     private String username;
     private String email;
-    private String role;
 
     public int getUserId() {
         return userId;
@@ -23,13 +24,6 @@ public class UsersPerRolDTO {
         this.username = username;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
 
     public String getEmail() {
         return email;

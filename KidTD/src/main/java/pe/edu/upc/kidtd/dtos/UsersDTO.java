@@ -1,11 +1,10 @@
 package pe.edu.upc.kidtd.dtos;
 
-import jakarta.persistence.*;
 import pe.edu.upc.kidtd.entities.Roles;
 
-import javax.management.relation.Role;
 import java.time.LocalDate;
 import java.util.List;
+
 
 public class UsersDTO {
     private int userId;
@@ -15,7 +14,8 @@ public class UsersDTO {
     private LocalDate createdAt;
     private LocalDate updatedAt;
     private Boolean enabled;
-    private String role;
+    private List<RolesPostDTO> roles;
+
 
     public int getUserId() {
         return userId;
@@ -73,11 +73,11 @@ public class UsersDTO {
         this.enabled = enabled;
     }
 
-    public String getRole() {
-        return role;
+    public List<RolesPostDTO> getRoles() {
+        return roles;
     }
 
-    public void setRole(Roles role) {
-        this.role = role.getRole_name();
+    public void setRoles(List<RolesPostDTO> roles) {
+        this.roles = roles;
     }
 }

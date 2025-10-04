@@ -2,47 +2,48 @@ package pe.edu.upc.kidtd.entities;
 
 import jakarta.persistence.*;
 
+import java.io.Serializable;
 import java.util.List;
 
 @Entity
-@Table(name = "\"Roles\"")
-public class Roles {
+@Table(name = "\"Roles\"",uniqueConstraints = {@UniqueConstraint(columnNames = {"userId","role_name"})})
+public class Roles implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int role_id;
+    private int roleId;
 
     @Column(name = "role_name", nullable = false, length = 30)
     private String role_name;
 
+    @ManyToOne
+    @JoinColumn(name = "userId", nullable = false)
+    private User user;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinColumn(name = "role_id")
-    private List<User> users;
 
     public Roles() {
 
     }
 
-    public Roles(int role_id, String role_name, List<User> users) {
-        this.role_id = role_id;
+    public Roles(int roleId, String role_name, User user) {
+        this.roleId = roleId;
         this.role_name = role_name;
-        this.users = users;
+        this.user = user;
     }
 
-    public List<User> getUsers() {
-        return users;
+    public User getUser() {
+        return user;
     }
 
-    public void setUsers(List<User> users) {
-        this.users = users;
+    public void setUser(User user) {
+        this.user = user;
     }
 
-    public int getRole_id() {
-        return role_id;
+    public int getRoleId() {
+        return roleId;
     }
 
-    public void setRole_id(int role_id) {
-        this.role_id = role_id;
+    public void setRoleId(int roleId) {
+        this.roleId = roleId;
     }
 
     public String getRole_name() {

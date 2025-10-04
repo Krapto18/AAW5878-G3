@@ -11,4 +11,5 @@ public interface IUsersService {
     public void delete(int id);
     public void update(User user);
     public List<User> listByRole(String role);
+    public List<User> ListarUsuarios();
 }

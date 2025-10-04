@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.RolesDTO;
+import pe.edu.upc.kidtd.dtos.RolesPostDTO;
 import pe.edu.upc.kidtd.entities.Roles;
 import pe.edu.upc.kidtd.servicesinterfaces.IRolesService;
 
@@ -21,10 +22,10 @@ public class RolesController {
 
     @GetMapping
     @PreAuthorize("hasAuthority('ADMIN')")
-    public List<RolesDTO> listarRoles() {
+    public List<RolesPostDTO> listarRoles() {
         return rS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x, RolesDTO.class);
+            return m.map(x, RolesPostDTO.class);
         }).collect(Collectors.toList());
     }
 
@@ -67,12 +68,12 @@ public class RolesController {
     public ResponseEntity<String> modificarRol(@RequestBody RolesDTO r) {
         ModelMapper m = new ModelMapper();
         Roles rol = m.map(r, Roles.class);
-        Roles ro = rS.listId(r.getRole_id());
+        Roles ro = rS.listId(r.getRoleId());
         if (ro == null) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No se puede modificar. No existe un rol con el ID: " + r.getRole_id());
+                    .body("No se puede modificar. No existe un rol con el ID: " + r.getRoleId());
         }
         rS.update(rol);
-        return ResponseEntity.ok("Rol con el ID " + r.getRole_id() + " modificado correctamente.");
+        return ResponseEntity.ok("Rol con el ID " + r.getRoleId() + " modificado correctamente.");
     }
 }
