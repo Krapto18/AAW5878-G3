@@ -9,12 +9,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.http.ResponseEntity;
-import pe.edu.upc.kidtd.dtos.UserPostDTO;
-import pe.edu.upc.kidtd.dtos.UsersDTO;
-import pe.edu.upc.kidtd.dtos.UsersPerRolDTO;
+import pe.edu.upc.kidtd.dtos.*;
 import pe.edu.upc.kidtd.entities.User;
 import pe.edu.upc.kidtd.servicesinterfaces.IUsersService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -95,6 +94,47 @@ public class UsersController {
             ModelMapper m = new ModelMapper();
             return m.map(x, UsersPerRolDTO.class);
         }).collect(Collectors.toList());
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/GoalsDuration")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> ListarGoalsDuration() {
+        List<ActGoalDurationDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = uS.activeGoalsDuration();
+
+        if (fila.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
+        }
+
+        for (String[] columna:fila){
+            ActGoalDurationDTO dto = new ActGoalDurationDTO();
+            dto.setUserId(Integer.parseInt(columna[0]));
+            dto.setTotal_metas_activas(Integer.parseInt(columna[1]));
+            dto.setPromedio_duracion_dias(columna[2]);
+            listaDTO.add(dto);
+        }
+
+        return ResponseEntity.ok(listaDTO);
+    }
+
+    @GetMapping("/GoalsCompleted")
+    @PreAuthorize("hasAuthority('ADMIN')")
+    public ResponseEntity<?> ListarGoalsCompleted() {
+        List<CompletedGoalsDTO> listaDTO = new ArrayList<>();
+        List<String[]> fila = uS.completedGoals();
+
+        if(fila.isEmpty()){
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No se encontraron registros");
+        }
+
+        for (String[] columna:fila) {
+            CompletedGoalsDTO dto = new CompletedGoalsDTO();
+            dto.setUserId(Integer.parseInt(columna[0]));
+            dto.setMetas_completadas(Integer.parseInt(columna[1]));
+            listaDTO.add(dto);
+        }
 
         return ResponseEntity.ok(listaDTO);
     }

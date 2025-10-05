@@ -12,4 +12,6 @@ public interface IUsersService {
     public void update(User user);
     public List<User> listByRole(String role);
     public List<User> ListarUsuarios();
+    public List<String[]> activeGoalsDuration();
+    public List<String[]> completedGoals();
 }
