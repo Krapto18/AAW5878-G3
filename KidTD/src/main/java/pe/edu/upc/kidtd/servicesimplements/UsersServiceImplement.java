@@ -51,4 +51,10 @@ public class UsersServiceImplement implements IUsersService {
     public List<User> ListarUsuarios() {
         return uR.ListarUsuarios();
     }
+
+    @Override
+    public List<String[]> activeGoalsDuration() { return uR.activeGoalsDuration(); }
+
+    @Override
+    public List<String[]> completedGoals() { return uR.completedGoals(); }
 }
