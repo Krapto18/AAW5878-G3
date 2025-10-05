@@ -36,4 +36,10 @@ public class PredictionServiceImplement implements IPredictionService {
     public Prediction findById(int id) {
         return predictionRepository.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> PrediccionPromedio() {
+        return predictionRepository.PrediccionPromedio();
+    }
+
 }

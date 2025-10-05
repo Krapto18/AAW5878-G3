@@ -37,4 +37,9 @@ public class QuestionsAnswersImplement implements IQuestionsAnswersService {
     public QuestionsAnswers findById(int id) {
         return repositoryAq.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> PuntuacionRespuestasAltoRiesgo() {
+        return repositoryAq.PuntuacionPromedioRespuestasAltoRiesgo();
+    }
 }
