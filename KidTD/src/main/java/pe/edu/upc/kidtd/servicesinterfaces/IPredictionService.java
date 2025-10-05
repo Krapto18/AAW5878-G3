@@ -10,4 +10,9 @@ public interface IPredictionService {
     public void delete(int id);
     public void update(Prediction prediction);
     public Prediction findById(int id);
+    public List<String[]> PrediccionPromedio();
+
+
 }
+
+
