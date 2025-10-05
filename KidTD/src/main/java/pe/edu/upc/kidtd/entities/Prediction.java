@@ -15,7 +15,7 @@ public class Prediction {
     @JoinColumn(name="userId")
     private User user;
     @Column(name = "predictionScore", nullable = false)
-    private DecimalFormat predictionScore;
+    private int predictionScore;
     @Column(name="explanationText", nullable = false)
     private String explanationText;
     @Column(name="predictedAt",nullable = false)
@@ -24,11 +24,11 @@ public class Prediction {
     public Prediction() {
     }
 
-    public Prediction(int predictionId, User user, String explanationText, DecimalFormat predictionScore, LocalDate predictedAt) {
+    public Prediction(int predictionId, User user, int predictionScore, String explanationText, LocalDate predictedAt) {
         this.predictionId = predictionId;
         this.user = user;
-        this.explanationText = explanationText;
         this.predictionScore = predictionScore;
+        this.explanationText = explanationText;
         this.predictedAt = predictedAt;
     }
 
@@ -48,11 +48,11 @@ public class Prediction {
         this.user = user;
     }
 
-    public DecimalFormat getPredictionScore() {
+    public int getPredictionScore() {
         return predictionScore;
     }
 
-    public void setPredictionScore(DecimalFormat predictionScore) {
+    public void setPredictionScore(int predictionScore) {
         this.predictionScore = predictionScore;
     }
 
