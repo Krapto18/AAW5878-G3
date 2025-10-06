@@ -35,4 +35,9 @@ public class GoalServiceImplement implements IGoalService {
     public Goal findById(int id) {
         return gS.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> CumplimientoMetas() {
+        return gS.CumplimientoMetas();
+    }
 }

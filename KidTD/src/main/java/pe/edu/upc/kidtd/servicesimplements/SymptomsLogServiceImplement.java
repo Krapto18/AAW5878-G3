@@ -35,4 +35,8 @@ public class SymptomsLogServiceImplement implements ISymptomsLogService {
     public SymptomsLog findById(int id) {
         return repositorySL.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> CumplimientoDeRegistroDeSintomas() {
+        return repositorySL.CumplimientoDeRegistroDeSintomas();    }
 }
