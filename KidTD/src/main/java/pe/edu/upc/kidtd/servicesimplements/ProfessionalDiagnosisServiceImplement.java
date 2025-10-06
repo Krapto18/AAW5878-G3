@@ -38,4 +38,9 @@ public class ProfessionalDiagnosisServiceImplement implements IProfessionalDiagn
     public ProfessionalDiagnosis findById(int id) {
         return repositoryPD.findById(id).orElse(null);
     }
+
+    @Override
+    public List<String[]> DiagnosticoProfesionalvsSistema() {
+        return repositoryPD.DiagnisticoProfesionalvsPrediccionSistema();
+    }
 }

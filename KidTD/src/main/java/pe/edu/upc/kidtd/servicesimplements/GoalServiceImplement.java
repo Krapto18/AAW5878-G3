@@ -40,4 +40,10 @@ public class GoalServiceImplement implements IGoalService {
     public List<String[]> CumplimientoMetas() {
         return gS.CumplimientoMetas();
     }
+
+    @Override
+    public double TiempoPromedioMeta() {
+        return gS.TiempoCumplimientoMetas();
+    }
+
 }

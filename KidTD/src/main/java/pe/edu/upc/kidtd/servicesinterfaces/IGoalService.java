@@ -12,4 +12,5 @@ public interface IGoalService {
     public void update(Goal goal);
     public Goal findById(int id);
     public List<String[]> CumplimientoMetas();
+    public double TiempoPromedioMeta();
 }

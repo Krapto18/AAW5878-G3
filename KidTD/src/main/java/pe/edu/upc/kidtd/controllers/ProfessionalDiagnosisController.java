@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.kidtd.dtos.DiagnosticoProfesionalvsSistemaDTO;
 import pe.edu.upc.kidtd.dtos.ProfessionalDiagnosisDTO;
+import pe.edu.upc.kidtd.dtos.RespuestasAltoRiesgoDTO;
 import pe.edu.upc.kidtd.entities.ProfessionalDiagnosis;
 import pe.edu.upc.kidtd.servicesinterfaces.IProfessionalDiagnosisService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -68,5 +71,24 @@ public class ProfessionalDiagnosisController {
         }
         pdService.update(pd);
         return ResponseEntity.ok("Diagnóstico con el ID " + pd.getDiagnosisId() + " modificado correctamente.");
+    }
+    @GetMapping("/Comparacion")
+    public ResponseEntity<?> DiagnosticoProfesionalVsPrediccion() {
+        List<DiagnosticoProfesionalvsSistemaDTO> qDto = new ArrayList<>();
+        List<String[]> lic = pdService.DiagnosticoProfesionalvsSistema();
+
+        if (lic.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay data");
+        }
+
+        for (String[] columna:lic) {
+
+            DiagnosticoProfesionalvsSistemaDTO dto = new DiagnosticoProfesionalvsSistemaDTO();
+            dto.setCantidadDiagnosticoProfesional(Integer.parseInt(columna[0]));
+            dto.setCantidadPrediccionSistema(Integer.parseInt(columna[1]));
+            qDto.add(dto);
+        }
+        return ResponseEntity.ok(qDto);
     }
 }

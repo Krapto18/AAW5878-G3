@@ -9,4 +9,5 @@ public interface IProfessionalDiagnosisService {
     public void delete(int id);
     public void update(ProfessionalDiagnosis diagnosis);
     public ProfessionalDiagnosis findById(int id);
+    public List<String[]> DiagnosticoProfesionalvsSistema();
 }

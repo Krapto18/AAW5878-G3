@@ -13,4 +13,8 @@ public interface IGoalRepository extends JpaRepository<Goal,Integer> {
             "ROUND(COUNT(goal_id) * 100.0 / (SELECT COUNT(*) FROM goal), 2) AS porcentaje FROM goal\n" +
             "GROUP BY status ORDER BY porcentaje DESC", nativeQuery = true)
     public List<String[]> CumplimientoMetas();
+
+    @Query(value="SELECT ROUND(AVG(EXTRACT(EPOCH FROM (end_date - start_date))) / 86400, 2) AS dias_promedio_para_cerrar_meta \n" +
+            "FROM goal WHERE status = False AND start_date IS NOT NULL AND end_date IS NOT NULL",nativeQuery = true)
+    public double TiempoCumplimientoMetas();
 }

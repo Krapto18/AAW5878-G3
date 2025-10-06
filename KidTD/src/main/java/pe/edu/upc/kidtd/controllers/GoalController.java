@@ -77,4 +77,16 @@ public class GoalController {
         }
         return ResponseEntity.ok(qDto);
     }
+    @GetMapping("/DiasCumplimiento")
+    public ResponseEntity<?> DiasCumplimientoMetas() {
+
+        Double lic = goalService.TiempoPromedioMeta();
+
+        if (lic == null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay data");
+        }
+
+        return ResponseEntity.ok(lic);
+    }
 }
