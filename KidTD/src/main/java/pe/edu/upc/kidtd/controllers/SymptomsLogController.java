@@ -5,10 +5,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.kidtd.dtos.CumplimientoMetasDTO;
+import pe.edu.upc.kidtd.dtos.CumplimientoRegistroSintomasDTO;
 import pe.edu.upc.kidtd.dtos.SymptomsLogDTO;
 import pe.edu.upc.kidtd.entities.SymptomsLog;
 import pe.edu.upc.kidtd.servicesinterfaces.ISymptomsLogService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -43,6 +46,26 @@ public class SymptomsLogController {
         }
         slS.update(sl);
         return ResponseEntity.ok("Registro con ID " + sl.getLogId() + " modificado correctamente.");
+    }
+    @GetMapping("/query6")
+    public ResponseEntity<?> CumplimientoRegistroSintomas() {
+        List<CumplimientoRegistroSintomasDTO> qDto = new ArrayList<>();
+        List<String[]> lic = slS.CumplimientoDeRegistroDeSintomas();
+
+        if (lic.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay data");
+        }
+
+        for (String[] columna:lic) {
+
+            CumplimientoRegistroSintomasDTO dto = new CumplimientoRegistroSintomasDTO();
+            dto.setMood_entry(columna[0]);
+            dto.setCantidad(Integer.parseInt(columna[1]));
+            dto.setPorcentaje(Double.parseDouble(columna[2]));
+            qDto.add(dto);
+        }
+        return ResponseEntity.ok(qDto);
     }
 
 }
