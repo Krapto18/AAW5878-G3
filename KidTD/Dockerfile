@@ -4,7 +4,7 @@ WORKDIR /KidTD
 
 COPY . .
 
-RUN mvn clean package -DskipTests
+RUN ./mvnw clean package -DskipTests
 
 FROM eclipse-temurin:24-jre
 
