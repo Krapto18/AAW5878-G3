@@ -2,6 +2,8 @@ FROM eclipse-temurin:24-jdk AS builder
 
 WORKDIR /KidTD
 
+RUN apt-get update && apt-get install -y maven
+
 COPY . .
 
 RUN ./mvnw clean package -DskipTests
