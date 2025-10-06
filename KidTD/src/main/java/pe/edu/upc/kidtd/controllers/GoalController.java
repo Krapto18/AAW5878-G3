@@ -6,12 +6,15 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import pe.edu.upc.kidtd.dtos.CumplimientoMetasDTO;
 import pe.edu.upc.kidtd.dtos.GoalDTO;
+import pe.edu.upc.kidtd.dtos.RespuestasAltoRiesgoDTO;
 import pe.edu.upc.kidtd.dtos.SymptomsLogDTO;
 import pe.edu.upc.kidtd.entities.Goal;
 import pe.edu.upc.kidtd.entities.SymptomsLog;
 import pe.edu.upc.kidtd.servicesinterfaces.IGoalService;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -53,5 +56,25 @@ public class GoalController {
         }
         goalService.update(goal);
         return ResponseEntity.ok("Registro con ID " + goal.getGoalId() + " modificado correctamente.");
+    }
+    @GetMapping("/query5")
+    public ResponseEntity<?> CumplimientoMetas() {
+        List<CumplimientoMetasDTO> qDto = new ArrayList<>();
+        List<String[]> lic = goalService.CumplimientoMetas();
+
+        if (lic.isEmpty()) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("No hay data");
+        }
+
+        for (String[] columna:lic) {
+
+            CumplimientoMetasDTO dto = new CumplimientoMetasDTO();
+            dto.setStatus(Boolean.parseBoolean(columna[0]));
+            dto.setTotal_metas(Integer.parseInt(columna[1]));
+            dto.setPorcentaje(Double.parseDouble(columna[2]));
+            qDto.add(dto);
+        }
+        return ResponseEntity.ok(qDto);
     }
 }

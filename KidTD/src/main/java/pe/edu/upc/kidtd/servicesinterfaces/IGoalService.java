@@ -11,4 +11,5 @@ public interface IGoalService {
     public void delete(int id);
     public void update(Goal goal);
     public Goal findById(int id);
+    public List<String[]> CumplimientoMetas();
 }

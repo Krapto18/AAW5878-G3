@@ -10,4 +10,5 @@ public interface ISymptomsLogService {
     public void delete(int id);
     public void update(SymptomsLog symptomsLog);
     public SymptomsLog findById(int id);
+    public List<String[]> CumplimientoDeRegistroDeSintomas();
 }
