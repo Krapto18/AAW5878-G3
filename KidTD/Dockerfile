@@ -10,7 +10,7 @@ FROM eclipse-temurin:24-jre
 
 WORKDIR /KidTD
 
-COPY --from=builder /KidTD/target/*.jar app.jar
+COPY --from=builder AAW5878-G3/KidTD/target/*.jar app.jar
 
 EXPOSE 8080
 
