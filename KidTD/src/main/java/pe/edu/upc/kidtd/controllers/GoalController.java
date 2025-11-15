@@ -6,12 +6,10 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
-import pe.edu.upc.kidtd.dtos.CumplimientoMetasDTO;
-import pe.edu.upc.kidtd.dtos.GoalDTO;
-import pe.edu.upc.kidtd.dtos.RespuestasAltoRiesgoDTO;
-import pe.edu.upc.kidtd.dtos.SymptomsLogDTO;
+import pe.edu.upc.kidtd.dtos.*;
 import pe.edu.upc.kidtd.entities.Goal;
 import pe.edu.upc.kidtd.entities.SymptomsLog;
+import pe.edu.upc.kidtd.entities.User;
 import pe.edu.upc.kidtd.servicesinterfaces.IGoalService;
 
 import java.util.ArrayList;
@@ -30,13 +28,27 @@ public class GoalController {
             return m.map(x, GoalDTO.class);
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> Goal(@PathVariable("id") Integer id) {
+        Goal g = goalService.findById(id);
+        if (g == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un usuario con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        GoalDTO dto = m.map(g, GoalDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
     public void insertGoal(@RequestBody GoalDTO goalDTO){
         ModelMapper m = new ModelMapper();
         Goal goal=m.map(goalDTO, Goal.class);
         goalService.insert(goal);
     }
-    @DeleteMapping("{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<String> deleteGoal(@PathVariable("id") Integer id){
         Goal goal= goalService.findById(id);
         if(goal==null) {

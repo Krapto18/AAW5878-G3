@@ -7,7 +7,7 @@ import java.time.LocalDateTime;
 public class GoalDTO {
 
     private int goalId;
-    private User user;
+    private UsersDTO user;
     private String goalDescription;
     private LocalDateTime startDate;
     private LocalDateTime endDate;
@@ -21,11 +21,11 @@ public class GoalDTO {
         this.goalId = goalId;
     }
 
-    public User getUser() {
+    public UsersDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UsersDTO user) {
         this.user = user;
     }
 

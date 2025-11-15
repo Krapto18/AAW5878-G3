@@ -1,19 +1,16 @@
 package pe.edu.upc.kidtd.dtos;
-
-import pe.edu.upc.kidtd.entities.User;
-
 public class RolesDTO {
 
     private int roleId;
     private String role_name;
-    private User user;
+    private UsersDTO user;
 
 
-    public User getUser() {
+    public UsersDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UsersDTO user) {
         this.user = user;
     }
 

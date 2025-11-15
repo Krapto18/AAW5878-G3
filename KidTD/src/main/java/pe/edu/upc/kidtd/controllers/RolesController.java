@@ -24,10 +24,10 @@ public class RolesController {
     /*@PreAuthorize("hasAuthority('ADMIN')")
 
      */
-    public List<RolesPostDTO> listarRoles() {
+    public List<RolesDTO> listarRoles() {
         return rS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
-            return m.map(x, RolesPostDTO.class);
+            return m.map(x, RolesDTO.class);
         }).collect(Collectors.toList());
     }
 
