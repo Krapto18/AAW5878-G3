@@ -21,7 +21,9 @@ public class QuestionnariesController {
     private IQuestionnariesService qS;
 
     @GetMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+    /*@PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+
+     */
     public List<QuestionnariesDTO> listarQuestionnaries() {
         return qS.list().stream().map(x->{
             ModelMapper m = new ModelMapper();
@@ -30,7 +32,9 @@ public class QuestionnariesController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+    /*@PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+
+     */
     public ResponseEntity<?> BuscarCuestionario(@PathVariable("id") Integer id) {
         Questionnaries q = qS.listId(id);
         if (q == null) {
@@ -44,7 +48,9 @@ public class QuestionnariesController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    /*@PreAuthorize("hasAuthority('ADMIN')")
+
+     */
     public void insertarCuestionario(@RequestBody QuestionnariesDTO q) {
         ModelMapper m = new ModelMapper();
         Questionnaries cuestionario = m.map(q, Questionnaries.class);
@@ -52,7 +58,9 @@ public class QuestionnariesController {
     }
 
     @DeleteMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    /*@PreAuthorize("hasAuthority('ADMIN')")
+
+     */
     public ResponseEntity<String> eliminarCuestionario(@PathVariable("id") Integer id) {
         Questionnaries q = qS.listId(id);
         if (q == null) {
@@ -64,7 +72,9 @@ public class QuestionnariesController {
     }
 
     @PutMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    /*@PreAuthorize("hasAuthority('ADMIN')")
+
+     */
     public ResponseEntity<String> modificarCuestionario(@RequestBody QuestionnariesDTO q) {
         ModelMapper m = new ModelMapper();
         Questionnaries quest = m.map(q, Questionnaries.class);
