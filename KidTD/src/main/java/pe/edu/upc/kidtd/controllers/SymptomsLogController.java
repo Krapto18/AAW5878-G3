@@ -7,7 +7,9 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import pe.edu.upc.kidtd.dtos.CumplimientoMetasDTO;
 import pe.edu.upc.kidtd.dtos.CumplimientoRegistroSintomasDTO;
+import pe.edu.upc.kidtd.dtos.GoalDTO;
 import pe.edu.upc.kidtd.dtos.SymptomsLogDTO;
+import pe.edu.upc.kidtd.entities.Goal;
 import pe.edu.upc.kidtd.entities.SymptomsLog;
 import pe.edu.upc.kidtd.servicesinterfaces.ISymptomsLogService;
 
@@ -28,6 +30,20 @@ public class SymptomsLogController {
             return m.map(x, SymptomsLogDTO.class);
         }).collect(Collectors.toList());
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> Symptom(@PathVariable("id") Integer id) {
+        SymptomsLog s = slS.findById(id);
+        if (s == null) {
+            return ResponseEntity
+                    .status(HttpStatus.NOT_FOUND)
+                    .body("No existe un usuario con el ID: " + id);
+        }
+        ModelMapper m = new ModelMapper();
+        SymptomsLogDTO dto = m.map(s, SymptomsLogDTO.class);
+        return ResponseEntity.ok(dto);
+    }
+
     @PostMapping
     public void insertSymptomsLog(@RequestBody SymptomsLogDTO s){
         ModelMapper m = new ModelMapper();
@@ -47,6 +63,17 @@ public class SymptomsLogController {
         slS.update(sl);
         return ResponseEntity.ok("Registro con ID " + sl.getLogId() + " modificado correctamente.");
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> deleteLog(@PathVariable("id") Integer id){
+        SymptomsLog log= slS.findById(id);
+        if(log==null) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("No existe un registro con el ID: " + id);
+        }
+        slS.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Registro eliminado ID: " + id);
+    }
+
     @GetMapping("/query6")
     public ResponseEntity<?> CumplimientoRegistroSintomas() {
         List<CumplimientoRegistroSintomasDTO> qDto = new ArrayList<>();

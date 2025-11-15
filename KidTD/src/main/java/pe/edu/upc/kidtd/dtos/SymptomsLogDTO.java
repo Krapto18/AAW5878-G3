@@ -7,7 +7,7 @@ import java.time.LocalDate;
 public class SymptomsLogDTO {
 
     private int logId;
-    private User user;
+    private UsersDTO user;
     private String moodEntry;
     private String symptomNotes;
     private LocalDate logDate;
@@ -20,11 +20,11 @@ public class SymptomsLogDTO {
         this.logId = logId;
     }
 
-    public User getUser() {
+    public UsersDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UsersDTO user) {
         this.user = user;
     }
 
