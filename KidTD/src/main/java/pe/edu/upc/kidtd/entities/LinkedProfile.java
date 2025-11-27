@@ -8,13 +8,13 @@ public class LinkedProfile {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int linkId;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name = "tutorId")
     private User tutor;
     @JoinColumn(name="childId")
     @OneToOne
     private User child;
-    @OneToOne
+    @ManyToOne
     @JoinColumn(name="professionalId")
     private User professional;
     @Column(name = "status", nullable = false)

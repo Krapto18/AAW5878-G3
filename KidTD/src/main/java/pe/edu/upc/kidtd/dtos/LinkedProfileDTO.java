@@ -5,9 +5,9 @@ import pe.edu.upc.kidtd.entities.User;
 public class LinkedProfileDTO {
 
     private int linkId;
-    private User tutor;
-    private User child;
-    private User professional;
+    private UsersDTO tutor;
+    private UsersDTO child;
+    private UsersDTO professional;
     private Boolean status;
 
     public int getLinkId() {
@@ -18,27 +18,27 @@ public class LinkedProfileDTO {
         this.linkId = linkId;
     }
 
-    public User getTutor() {
+    public UsersDTO getTutor() {
         return tutor;
     }
 
-    public void setTutor(User tutor) {
+    public void setTutor(UsersDTO tutor) {
         this.tutor = tutor;
     }
 
-    public User getChild() {
+    public UsersDTO getChild() {
         return child;
     }
 
-    public void setChild(User child) {
+    public void setChild(UsersDTO child) {
         this.child = child;
     }
 
-    public User getProfessional() {
+    public UsersDTO getProfessional() {
         return professional;
     }
 
-    public void setProfessional(User professional) {
+    public void setProfessional(UsersDTO professional) {
         this.professional = professional;
     }
 
