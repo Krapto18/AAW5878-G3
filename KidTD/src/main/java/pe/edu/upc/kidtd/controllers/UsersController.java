@@ -51,7 +51,7 @@ public class UsersController {
     }
 
     @PostMapping
-    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+    //@PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public void insertarUsuario(@RequestBody UserPostDTO uDTO) {
         ModelMapper m = new ModelMapper();
         User user = m.map(uDTO, User.class);
@@ -106,7 +106,6 @@ public class UsersController {
     }
 
     @GetMapping("/GoalsDuration")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> ListarGoalsDuration() {
         List<ActGoalDurationDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.activeGoalsDuration();
@@ -127,7 +126,6 @@ public class UsersController {
     }
 
     @GetMapping("/GoalsCompleted")
-    @PreAuthorize("hasAuthority('ADMIN')")
     public ResponseEntity<?> ListarGoalsCompleted() {
         List<CompletedGoalsDTO> listaDTO = new ArrayList<>();
         List<String[]> fila = uS.completedGoals();

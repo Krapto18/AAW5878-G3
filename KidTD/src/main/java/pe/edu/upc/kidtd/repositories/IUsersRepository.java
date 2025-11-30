@@ -29,7 +29,7 @@ public interface IUsersRepository extends JpaRepository<User,Integer> {
             "       COUNT(*) AS total_metas_activas,\n" +
             "       AVG(end_date - start_date) AS promedio_duracion_dias\n" +
             "FROM goal g\n" +
-            "WHERE g.status = false\n" +
+            "WHERE g.status = true\n" +
             "GROUP BY g.user_id\n" +
             "ORDER BY total_metas_activas DESC;", nativeQuery = true)
     public List<String[]> activeGoalsDuration();

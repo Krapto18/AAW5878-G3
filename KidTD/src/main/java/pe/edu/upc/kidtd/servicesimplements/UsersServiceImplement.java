@@ -1,6 +1,7 @@
 package pe.edu.upc.kidtd.servicesimplements;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import pe.edu.upc.kidtd.entities.User;
 import pe.edu.upc.kidtd.repositories.IUsersRepository;
@@ -12,6 +13,8 @@ import java.util.List;
 public class UsersServiceImplement implements IUsersService {
     @Autowired
     private IUsersRepository uR;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public List<User> list() {
@@ -20,6 +23,8 @@ public class UsersServiceImplement implements IUsersService {
 
     @Override
     public void insert(User user) {
+        String hashedPassword = passwordEncoder.encode(user.getPasswordHash());
+        user.setPasswordHash(hashedPassword);
 
         if (user.getRoles() != null) {
             user.getRoles().forEach(role -> role.setUser(user));
