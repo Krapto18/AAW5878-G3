@@ -1,14 +1,12 @@
 package pe.edu.upc.kidtd.dtos;
 
-import pe.edu.upc.kidtd.entities.User;
-
 import java.text.DecimalFormat;
 import java.time.LocalDate;
 
 public class PredictionDTO {
     private int predictionId;
-    private User user;
-    private DecimalFormat predictionScore;
+    private SymptomsLogDTO log;
+    private int predictionScore;
     private String explanationText;
     private LocalDate predictedAt;
 
@@ -20,19 +18,19 @@ public class PredictionDTO {
         this.predictionId = predictionId;
     }
 
-    public User getUser() {
-        return user;
+    public SymptomsLogDTO getLog() {
+        return log;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLog(SymptomsLogDTO log) {
+        this.log = log;
     }
 
-    public DecimalFormat getPredictionScore() {
+    public int getPredictionScore() {
         return predictionScore;
     }
 
-    public void setPredictionScore(DecimalFormat predictionScore) {
+    public void setPredictionScore(int predictionScore) {
         this.predictionScore = predictionScore;
     }
 

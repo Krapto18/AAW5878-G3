@@ -7,7 +7,7 @@ import java.util.Date;
 
 public class QuestionsAnswersDTO {
     private int answer_id;
-    private User user;
+    private UsersDTO user;
     private Questions questions;
     private int answer_value;
     private Date answered_at;
@@ -20,11 +20,11 @@ public class QuestionsAnswersDTO {
         this.answer_id = answer_id;
     }
 
-    public User getUser() {
+    public UsersDTO getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UsersDTO user) {
         this.user = user;
     }
 

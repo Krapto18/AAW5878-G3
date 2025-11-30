@@ -21,7 +21,7 @@ public class RolesController {
     private IRolesService rS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
 
 
     public List<RolesDTO> listarRoles() {
@@ -32,7 +32,7 @@ public class RolesController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
 
 
     public ResponseEntity<?> BuscarRoles(@PathVariable("id") Integer id) {

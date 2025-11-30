@@ -24,7 +24,7 @@ public class UsersController {
     private IUsersService uS;
 
     @GetMapping
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TUTOR')")
 
 
     public List<UsersDTO> listarUsuarios() {
@@ -35,7 +35,7 @@ public class UsersController {
     }
 
     @GetMapping("/{id}")
-    @PreAuthorize("hasAuthority('ADMIN')")
+    @PreAuthorize("hasAnyAuthority('ADMIN','TUTOR')")
 
 
     public ResponseEntity<?> PerfilDeUsuario(@PathVariable("id") Integer id) {
@@ -52,8 +52,6 @@ public class UsersController {
 
     @PostMapping
     @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
-
-
     public void insertarUsuario(@RequestBody UserPostDTO uDTO) {
         ModelMapper m = new ModelMapper();
         User user = m.map(uDTO, User.class);

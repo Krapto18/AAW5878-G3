@@ -46,23 +46,23 @@ public class QuestionsAnswersController {
         return ResponseEntity.ok("Respuesta con el ID: " + id + " eliminado correctamente");
     }
 
-    @GetMapping("/query2")
-    public ResponseEntity<?> RespuestasAltoRiesgo() {
-        List<RespuestasAltoRiesgoDTO> qDto = new ArrayList<>();
-        List<String[]> lic = qaS.PuntuacionRespuestasAltoRiesgo();
-
-        if (lic.isEmpty()) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND)
-                    .body("No hay data");
-        }
-
-        for (String[] columna:lic) {
-
-            RespuestasAltoRiesgoDTO dto = new RespuestasAltoRiesgoDTO();
-            dto.setQuestion_text(columna[0]);
-            dto.setAvg_respuesta_alto_riesgo(Double.parseDouble(columna[1]));
-            qDto.add(dto);
-        }
-        return ResponseEntity.ok(qDto);
-    }
+//    @GetMapping("/query2")
+//    public ResponseEntity<?> RespuestasAltoRiesgo() {
+//        List<RespuestasAltoRiesgoDTO> qDto = new ArrayList<>();
+//        List<String[]> lic = qaS.PuntuacionRespuestasAltoRiesgo();
+//
+//        if (lic.isEmpty()) {
+//            return ResponseEntity.status(HttpStatus.NOT_FOUND)
+//                    .body("No hay data");
+//        }
+//
+//        for (String[] columna:lic) {
+//
+//            RespuestasAltoRiesgoDTO dto = new RespuestasAltoRiesgoDTO();
+//            dto.setQuestion_text(columna[0]);
+//            dto.setAvg_respuesta_alto_riesgo(Double.parseDouble(columna[1]));
+//            qDto.add(dto);
+//        }
+//        return ResponseEntity.ok(qDto);
+//    }
 }

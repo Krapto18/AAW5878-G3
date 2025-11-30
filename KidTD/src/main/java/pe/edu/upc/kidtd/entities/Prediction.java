@@ -12,8 +12,8 @@ public class Prediction {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int predictionId;
     @ManyToOne
-    @JoinColumn(name="userId")
-    private User user;
+    @JoinColumn(name="logId")
+    private SymptomsLog log;
     @Column(name = "predictionScore", nullable = false)
     private int predictionScore;
     @Column(name="explanationText", nullable = false)
@@ -24,12 +24,12 @@ public class Prediction {
     public Prediction() {
     }
 
-    public Prediction(int predictionId, User user, int predictionScore, String explanationText, LocalDate predictedAt) {
+    public Prediction(int predictionId, SymptomsLog log, int predictionScore, LocalDate predictedAt, String explanationText) {
         this.predictionId = predictionId;
-        this.user = user;
+        this.log = log;
         this.predictionScore = predictionScore;
-        this.explanationText = explanationText;
         this.predictedAt = predictedAt;
+        this.explanationText = explanationText;
     }
 
     public int getPredictionId() {
@@ -40,12 +40,12 @@ public class Prediction {
         this.predictionId = predictionId;
     }
 
-    public User getUser() {
-        return user;
+    public SymptomsLog getLog() {
+        return log;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setLog(SymptomsLog log) {
+        this.log = log;
     }
 
     public int getPredictionScore() {
