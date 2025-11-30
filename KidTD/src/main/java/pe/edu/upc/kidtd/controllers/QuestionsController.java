@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 import pe.edu.upc.kidtd.dtos.QuestionsDTO;
 import pe.edu.upc.kidtd.entities.Questions;
 import pe.edu.upc.kidtd.servicesinterfaces.IQuestionsService;
@@ -24,6 +25,27 @@ public class QuestionsController {
     @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
     public List<QuestionsDTO> listQuestions() {
         return qS.list().stream().map(x -> {
+            ModelMapper m = new ModelMapper();
+            return m.map(x, QuestionsDTO.class);
+        }).collect(Collectors.toList());
+    }
+
+    @GetMapping("/busquedas")
+    @PreAuthorize("hasAnyAuthority('ADMIN','PROFESIONAL','TUTOR')")
+    public List<QuestionsDTO> buscarPorCuestionario(@RequestParam("id") Integer id) {
+
+        if (id == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "El parámetro 'id' (questionnaireId) es obligatorio.");
+        }
+
+        List<Questions> questions = qS.search(id);
+
+        if (questions.isEmpty()) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "No se encontraron preguntas para el cuestionario con ID: " + id);
+        }
+
+        // Mapear a DTO
+        return questions.stream().map(x -> {
             ModelMapper m = new ModelMapper();
             return m.map(x, QuestionsDTO.class);
         }).collect(Collectors.toList());
