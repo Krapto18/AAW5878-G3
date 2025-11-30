@@ -36,4 +36,9 @@ public class QuestionsServiceImplement implements IQuestionsService {
     public Questions findById(int id) {
         return repositoryQ.findById(id).orElse(null);
     }
+
+    @Override
+    public List<Questions> search(int questionnaireId) {
+        return repositoryQ.buscarPorCuestionarioId(questionnaireId);
+    }
 }

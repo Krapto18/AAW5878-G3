@@ -10,4 +10,5 @@ public interface IQuestionsService {
     public void delete(int id);
     public void update(Questions questions);
     public Questions findById(int id);
+    public List<Questions> search(int questionnaireId);
 }
