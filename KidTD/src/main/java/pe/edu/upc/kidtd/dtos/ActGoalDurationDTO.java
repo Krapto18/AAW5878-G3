@@ -2,11 +2,20 @@ package pe.edu.upc.kidtd.dtos;
 
 public class ActGoalDurationDTO {
     public int userId;
+    public String username;
     public int total_metas_activas;
     public String promedio_duracion_dias;
 
     public int getUserId() {
         return userId;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public void setUserId(int userId) {

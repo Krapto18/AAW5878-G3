@@ -117,8 +117,9 @@ public class UsersController {
         for (String[] columna:fila){
             ActGoalDurationDTO dto = new ActGoalDurationDTO();
             dto.setUserId(Integer.parseInt(columna[0]));
-            dto.setTotal_metas_activas(Integer.parseInt(columna[1]));
-            dto.setPromedio_duracion_dias(columna[2]);
+            dto.setUsername(columna[1]);
+            dto.setTotal_metas_activas(Integer.parseInt(columna[2]));
+            dto.setPromedio_duracion_dias(columna[3]);
             listaDTO.add(dto);
         }
 
@@ -137,7 +138,8 @@ public class UsersController {
         for (String[] columna:fila) {
             CompletedGoalsDTO dto = new CompletedGoalsDTO();
             dto.setUserId(Integer.parseInt(columna[0]));
-            dto.setMetas_completadas(Integer.parseInt(columna[1]));
+            dto.setUsername(columna[1]);
+            dto.setMetas_completadas(Integer.parseInt(columna[2]));
             listaDTO.add(dto);
         }
 
