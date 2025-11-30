@@ -79,7 +79,7 @@ public class WebSecurityConfig {
                 .authorizeHttpRequests(req -> req
                         .requestMatchers("/v3/api-docs/**", "/swagger-ui/**", "/swagger-ui.html").permitAll()
                         .requestMatchers("/login").permitAll()
-                        .requestMatchers(HttpMethod.POST, "/Users").permitAll()
+                        .requestMatchers( "/Users").permitAll()
                         .anyRequest().authenticated()
                 )
                 .httpBasic(Customizer.withDefaults())
