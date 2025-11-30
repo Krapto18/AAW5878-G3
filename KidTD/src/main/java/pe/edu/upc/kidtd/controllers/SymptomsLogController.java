@@ -74,7 +74,7 @@ public class SymptomsLogController {
         return ResponseEntity.status(HttpStatus.OK).body("Registro eliminado ID: " + id);
     }
 
-    @GetMapping("/query6")
+    @GetMapping("/CumplimientoRegistroSintomas")
     public ResponseEntity<?> CumplimientoRegistroSintomas() {
         List<CumplimientoRegistroSintomasDTO> qDto = new ArrayList<>();
         List<String[]> lic = slS.CumplimientoDeRegistroDeSintomas();

@@ -38,8 +38,8 @@ public class QuestionsAnswersImplement implements IQuestionsAnswersService {
         return repositoryAq.findById(id).orElse(null);
     }
 
-//    @Override
-//    public List<String[]> PuntuacionRespuestasAltoRiesgo() {
-//        return repositoryAq.PuntuacionPromedioRespuestasAltoRiesgo();
-//    }
+   @Override
+   public List<String[]> PuntuacionRespuestasAltoRiesgo() {
+        return repositoryAq.PuntuacionPromedioRespuestasAltoRiesgo();
+  }
 }

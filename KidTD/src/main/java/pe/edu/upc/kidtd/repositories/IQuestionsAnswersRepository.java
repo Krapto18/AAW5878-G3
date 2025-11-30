@@ -9,9 +9,9 @@ import java.util.List;
 
 @Repository
 public interface IQuestionsAnswersRepository extends JpaRepository<QuestionsAnswers,Integer> {
-//    @Query("SELECT q.question_text, ROUND(AVG(qa.answer_value), 2) AS avg_respuesta_alto_riesgo " +
-//            "FROM QuestionsAnswers qa JOIN Questions q ON qa.questions.question_id = q.question_id " +
-//            "WHERE qa.answer_id IN (SELECT p.user.userId FROM Prediction p WHERE p.predictionScore > 70) " +
-//            "GROUP BY q.question_text ORDER BY avg_respuesta_alto_riesgo DESC LIMIT 10")
-//    public List<String[]> PuntuacionPromedioRespuestasAltoRiesgo();
+   @Query("SELECT q.question_text, ROUND(AVG(qa.answer_value), 2) AS avg_respuesta_alto_riesgo " +
+          "FROM QuestionsAnswers qa JOIN Questions q ON qa.questions.question_id = q.question_id " +
+           "WHERE qa.answer_id IN (SELECT p.log.user.userId FROM Prediction p WHERE p.predictionScore > 7) " +
+           "GROUP BY q.question_text ORDER BY avg_respuesta_alto_riesgo DESC LIMIT 10")
+   public List<String[]> PuntuacionPromedioRespuestasAltoRiesgo();
 }

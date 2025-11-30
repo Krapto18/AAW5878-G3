@@ -10,5 +10,5 @@ public interface IQuestionsAnswersService {
     public void delete(int id);
     public void update(QuestionsAnswers questionsAnswers);
     public QuestionsAnswers findById(int id);
-//    public List<String[]> PuntuacionRespuestasAltoRiesgo();
+    public List<String[]> PuntuacionRespuestasAltoRiesgo();
 }

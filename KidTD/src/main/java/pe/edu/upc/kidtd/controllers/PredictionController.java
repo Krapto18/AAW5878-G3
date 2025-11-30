@@ -32,8 +32,8 @@ public class PredictionController {
         Prediction prediction=m.map(predictionDTO, Prediction.class);
         predictionService.insert(prediction);
     }
-    @GetMapping("/query1")
-    public ResponseEntity<?> totalSoftware() {
+    @GetMapping("/PrediccionPromedio")
+    public ResponseEntity<?> PrediccionPromedio() {
         List<PrediccionPromedioDTO> qDto = new ArrayList<>();
         List<String[]> lic = predictionService.PrediccionPromedio();
 
@@ -46,8 +46,8 @@ public class PredictionController {
 
             PrediccionPromedioDTO dto = new PrediccionPromedioDTO();
             dto.setMes(columna[0]);
-            dto.setTotalPredicciones(Integer.parseInt(columna[1]));
-            dto.setScorePromedioMensual(Double.parseDouble(columna[2]));
+            dto.setScorePromedioMensual(Double.parseDouble(columna[1]));
+            dto.setTotalPredicciones(Integer.parseInt(columna[2]));
             qDto.add(dto);
         }
         return ResponseEntity.ok(qDto);
